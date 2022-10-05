@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
+    <script src="customer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>Flight Finder</title>
+  </head>
+  <body>
+    <header>
+      <img id="logo" src="plane.png" alt="plane logo">
+      <h1>Flight Finder</h1>
+      <nav>
+        <button id="Logout-btn" class="nav-bar">Log Out</button>
+        <button id="Flights-btn" class="nav-bar">My Flights</button>
+        <button id="Spent-btn" class="nav-bar">Spent</button>
+        <button id="Home-btn" class="nav-bar hidden">Home</button>
+      </nav>
+    </header>
+
+    <section id="Home">
+      <p>Where To?</p>
+      <section>
+        <select id="trip-type" name="trip-type">
+          <option value="Round-Trip">Round Trip</option>
+          <option value="One-Way">One Way</option>
+        </select>
+        <input type="text" class="major-info" id="From" name="From" placeholder="From?" required>
+        <input type="text" class="major-info" id="To" name="To" placeholder="To?" required>
+        <label for="start-date">From</label>
+        <input type="date" class="major-info" id="start-date" name="Start" required>
+        <label for="end-date" id="end-label">To</label>
+        <input type="date" class="major-info" id="end-date" name="end" value="">
+        <button id="search-btn" type="submit">Search</button>
+      </section>
+
+      <div id="flights-div">
+        <table id="search-flights"></table>
+        <table id="Tickets"></table>
+      </div>
+    </section>
+
+    <section id="Flights" class ="hidden">
+      <h2>Your Flights</h2>
+      <table id="Current"></table>
+      <table id="Past"></table>
+    </section>
+
+    <section id="Spent" class ="hidden">
+      <label for="spent-start-date">From</label>
+      <input type="date" class="major-info" id="spent-start-date" name="spend-start" value=undefined required>
+      <label for="spent-end-date" id="end-label">To</label>
+      <input type="date" class="major-info" id="spent-end-date" name="spend-end" value=undefined required>
+      <button id="spent-btn" type="submit">Search</button>
+      <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+      <p id="total-spent"></p>
+    </section>
+
+    <section id="comments-section" class="hidden">
+        <label id="comment-label" for="comments"></label>
+        <input type="text" id="comments-input" size="20" name="comments">
+        <select id="rating" name="rating">
+          <option value="1">1 Star</option>
+          <option value="2">2 Star</option>
+          <option value="3">3 Star</option>
+          <option value="4">4 Star</option>
+          <option value="5">5 Star</option>
+        </select>
+        <button id="Comment-btn">Comment</button>
+    </section>
+
+    <section id="card-info" class="hidden">
+      <form action="/purchase" method="POST">
+        <input type="text" class="card-info" id="ticket-id" name="ticket-id" value="" required>
+        <input type="text" class="card-info" id="card-type" name="card-type" placeholder="card type?" required>
+        <input type="text" class="card-info" id="card-num" name="card-num" placeholder="card number?" required>
+        <input type="text" class="card-info" id="card-name" name="card-name" placeholder="card name" required>
+        <label for="card-expiration">Expiration</label>
+        <input type="date" class="card-info" id="card-expiration" name="card-expiration" required>
+        <button type="submit">Purchase</button>
+      </form>
+    </section>
+
+  </body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
+    <script src="staff.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>Flight Finder</title>
+  </head>
+  <body>
+    <header>
+      <img id="logo" src="plane.png" alt="plane logo">
+      <h1>Flight Finder</h1>
+      <nav>
+        <button id="Create-btn" class="nav-bar">Create</button>
+        <button id="Stats-btn" class="nav-bar">Stats</button>
+        <button id="Home-btn" class="nav-bar hidden">Home</button>
+        <button id="Logout-btn" class="nav-bar">Log Out</button>
+      </nav>
+    </header>
+
+    <section id="Home">
+      <p>Show Flights</p>
+        <input type="text" class="major-info" id="From" name="From" placeholder="From?" required>
+        <input type="text" class="major-info" id="To" name="To" placeholder="To?" required>
+        <label for="start-date">From</label>
+        <input type="date" class="major-info" id="start-date" name="Start" required>
+        <label for="end-date">To</label>
+        <input type="date" class="major-info" id="end-date" name="end" required>
+        <button type="submit" id="search-flights-btn">Search</button>
+        <section id="edit" class="hidden">
+          <input type="text" class="major-info" id="edit-airline" name="edit-airline" required>
+          <input type="text" class="major-info" id="edit-dep-date" name="edit-dep-date"  required>
+          <input type="text" class="major-info" id="edit-dep-time" name="edit-dep-time"  required>
+          <input type="text" class="major-info" id="edit-flight-num" name="edit-dep-port"  required>
+          <select id="edit-status" name="edit-status">
+            <option value="Ontime">Ontime</option>
+            <option value="Delayed">Delayed</option>
+            <option value="Complete">Complete</option>
+            <option value="Canceled">Canceled</option>
+          </select>
+          <button type="submit" id="edit-btn">sumbit</button>
+        </section>
+        <section><table id="Flights"></table></section>
+        <section>
+          <h3>Comments Section</h3>
+          <table id="Comments"></table>
+        </section>
+    </section>
+
+    <section id="Create" class ="hidden">
+
+      <section id="add-flight">
+        <form action="/add-flight" method="POST">
+          <p>Create Flight</p>
+          <table>
+            <tr>
+              <td align="right">Flight Info: </td>
+              <td align="left"><input type="text" class="fligiht-info" id="flight-num" name="flight-num" placeholder="Flight Number"></td>
+              <td align="left"><input type="text" class="flight-info" id="airline" name = "airline" placeholder="Airline"></td>
+              <td align="left"><input type="text" class="flight-info" id="price" name = "price" placeholder="Price"></td>
+              <td align="left"><input type="text" class="flight-info" id="status" name = "status" placeholder="Status"></td>
+              <td align="left"><input type="text" class="flight-info" id="plane" name = "plane" placeholder="Plane-id"></td>
+            </tr>
+
+            <tr>
+              <td align="right">Departure Info: </td>
+              <td align="left"><input type="date" class="flight-info" id="dep-date" name="dep-date"></td>
+              <td align="left"><input type="text" class="flight-info" id="dep-hour" name="dep-hour" placeholder="Departure Hour Ex: 10:00:00"></td>
+              <td align="left"><input type="text" class="flight-info" id="dep-airport" name = "dep-airport" placeholder="Departure Airport"></td>
+            </tr>
+
+            <tr>
+              <td align="right">Arrival Info: </td>
+              <td align="left"><input type="date" class="flight-info" id="arr-date" name="arr-date"></td>
+              <td align="left"><input type="text" class="flight-info" id="arr-hour" name="arr-hour" placeholder="Arrival Hour Ex: 10:00:00"></td>
+              <td align="left"><input type="text" class="flight-info" id="arr-airport" name = "arr-airport" placeholder="Arrival Airport"></td>
+              <td align="left"><button class="Enter-btn" type="submit">Create</button></td>
+            </tr>
+          </table>
+        </form>
+      </section>
+
+      <section id="add-airplane">
+        <form action="/add-airplane" method="POST">
+          <p>Create Plane</p>
+          <table>
+            <tr>
+              <td align="right">Plane Info: </td>
+              <td align="left"><input type="text" class="plane-info" name="plane-id" placeholder="Plane ID"></td>
+              <td align="left"><input type="text" class="plane-info" name = "airline" placeholder="Airline"></td>
+              <td align="left"><input type="text" class="plane-info" name = "seats" placeholder="Seats"></td>
+              <td align="left"><input type="text" class="plane-info" name = "manufacturer" placeholder="manufacturer"></td>
+              <td align="left"><input type="text" class="plane-info" name = "age" placeholder="Age"></td>
+              <td align="left"><button class="Enter-btn" type="submit">Create</button></td>
+            </tr>
+          </table>
+        </form>
+      </section>
+
+      <section id="add-airport">
+        <p>Create Airport</p>
+        <form action="/add-airport" method="POST">
+          <table>
+            <tr>
+              <td align="right">Airport Info: </td>
+              <td align="left"><input type="text" class="airport-info" name="airport-id" placeholder="Airport ID"></td>
+              <td align="left"><input type="text" class="airport-info" name = "airport-name" placeholder="Airport Name"></td>
+              <td align="left"><input type="text" class="airport-info" name = "city" placeholder="City"></td>
+              <td align="left"><input type="text" class="airport-info" name = "country" placeholder="Country"></td>
+              <td align="left">
+                <select name="airport-type">
+                  <option value="International">International</option>
+                  <option value="National">National</option>
+                </select>
+              </td>
+              <td align="left"><button class="Enter-btn" type="submit">Create</button></td>
+            </tr>
+          </table>
+        </form>
+      </section>
+    </section>
+
+    <section id="Stats" class="hidden">
+      <h3>Find Tickets Sold in Date Range</h3>
+      <label for="stat-start-date">From</label>
+      <input type="date" class="major-info" id="stat-start-date" name="Start" required>
+      <label for="stat-end-date">To</label>
+      <input type="date" class="major-info" id="stat-end-date" name="end" required>
+      <button type="submit" id="stat-btn">Find</button>
+      <div id="chart-div" class="hidden">
+        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+        <p id="tickets-sold"></p>
+      </div>
+
+      <section id="tables-stats">
+        <section id="Revenue">
+          <table id="table-revenue">
+            <p>Revenue</p>
+            <tr>
+              <td></td>
+              <td>First</td>
+              <td>Business</td>
+              <td>Economy</td>
+            </tr>
+            <tr>
+              <td>Last Month</td>
+              <td id="m1"></td>
+              <td id="m2"></td>
+              <td id="m3"></td>
+            </tr>
+            <tr>
+              <td>Last Year</td>
+              <td id="y1"></td>
+              <td id="y2"></td>
+              <td id="y3"></td>
+            </tr>
+          </table>
+        </section>
+
+        <section id="Top-Destinations">
+          <table>
+            <p>Top Destinations</p>
+            <tr>
+              <td></td>
+              <td>First</td>
+              <td>Second</td>
+              <td>Third</td>
+            </tr>
+            <tr>
+              <td>Last Month</td>
+              <td id="dest-m1">1</td>
+              <td id="dest-m2"></td>
+              <td id="dest-m3"></td>
+            </tr>
+            <tr>
+              <td>Last Year</td>
+              <td id="dest-y1"></td>
+              <td id="dest-y2"></td>
+              <td id="dest-y3"></td>
+            </tr>
+          </table>
+        </section>
+      </section>
+
+      <section id="Customer">
+        <div id="top-customer"></div>
+        <div id="taken">
+          <input type="test" class="major-info" id="customer-search" name="customer-search" placeholder="Customer Email" required>
+          <button type="submit" id="customer-btn">Find</button>
+          <table id="Customers-Flights-Table"></table>
+        </div>
+      </section>
+
+    </section>
+
+  </body>
+</html>

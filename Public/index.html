@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
+    <script src="index.js"></script>
+    <title>Flight Finder</title>
+  </head>
+  <body>
+
+    <header>
+      <img id="logo" src="plane.png" alt="plane logo">
+      <h1> Flight Finder </h1>
+      <nav>
+        <button id="Home-btn" class="nav-bar hidden" >Home</button>
+        <button id="Login-btn" class="nav-bar">Sign In</button>
+        <button id="Register-btn" class="nav-bar">Register</button>
+      </nav>
+    </header>
+
+    <section id="Home">
+      <h2>Where To?</h2>
+      <section>
+        <select id="trip-type" name="trip-type">
+          <option value="Round-Trip">Round Trip</option>
+          <option value="One-Way">One Way</option>
+        </select>
+        <input type="text" class="major-info" id="From" name="From" placeholder="From?" required>
+        <input type="text" class="major-info" id="To" name="To" placeholder="To?" required>
+        <label for="start-date">From</label>
+        <input type="date" class="major-info" id="start-date" name="Start" value="" required>
+        <label for="end-date" id="end-label">To</label>
+        <input type="date" class="major-info" id="end-date" name="end" value="">
+        <button id="search-flights" type="submit">Search</button>
+      </section>
+      <div id="flights-div">
+        <table id="flights">
+        </table>
+      </div>
+    </section>
+
+    <section id="Login" class="hidden">
+      <h2>Login</h2>
+      <select id="Login-type" name="Login-type">
+        <option value="Customoer">Customer</option>
+        <option value="Staff">Staff</option>
+      </select>
+      <form action="/LoginUser" method="POST" id="userLogin">
+        <input type="text" class="login-info" id="email" name="email" placeholder="Email" required>
+        <input type="password" class="login-info" id="password" name="password" placeholder="Password" required>
+        <button class="Enter-btn" type="submit">Enter</button>
+      </form>
+      <form action="/LoginStaff" method="POST" id="staffLogin" class="hidden">
+        <input type="text" class="login-info" id="username" name="username" placeholder="username" required>
+        <input type="password" class="login-info" id="password" name="password" placeholder="Password" required>
+        <button class="Enter-btn" type="submit">Enter</button>
+      </form>
+
+      <div class="response-container"><p id="log-response"></p></div>
+    </section>
+
+    <section id="Register" class="hidden">
+      <h2>Register</h2>
+      <select id="Registration-type" name="Registration-type">
+        <option value="Customoer">Customer</option>
+        <option value="Staff">Staff</option>
+      </select>
+      <form action="/RegisterUser" method="POST" id="customer-info">
+        <table>
+          <tr>
+            <td align="right">Info: </td>
+            <td align="left"><input type="tel" class="Register-info" id="tel" name="phone" placeholder="Phone" required></td>
+            <td align="left"><input type="test" class="Register-info" id="name" name = "name" placeholder="Full name" required></td>
+          </tr>
+
+          <tr>
+            <td align="right">Address: </td>
+            <td align="left"><input type="text" class="Register-info" id="street" name="street" placeholder="Street" required></td>
+            <td align="left"><input type="text" class="Register-info" id="city" name = "city" placeholder="City" required></td>
+            <td align="left"><input type="text" class="Register-info" id="state" name="state" placeholder="State" required></td>
+            <td align="left"><input type="text" class="Register-info" id="builiding" name = "building" placeholder="Building" required></td>
+          </tr>
+
+          <tr>
+            <td align="right">Passport: </td>
+            <td align="left"><input type="text" class="Register-info" id="pass-num" name="pass-num" placeholder="Passport Number" required></td>
+            <td align="left"><input type="text" class="Register-info" id="pass-country" name = "pass-country" placeholder="Country" required></input></td>
+            <td align="left">
+              <label for="pass-expiration">Expiration</label>
+              <input type="date" class="Register-info" id="pass-expriration" name="pass-expiration" required></input>
+            </td>
+            <td align="left">
+              <label for="Birthday">Birthday</label>
+              <input type="date" class="Register-info" id="birthday" name = "birthday" placeholder="Birthday" required>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="right">Password: </td>
+            <td align="left"><input type="text" class="Register-info" id="email" name="email" placeholder="Email" required></td>
+            <td align="left"><input type="password" class="Register-info" id="password" name = "password" placeholder="Password" required></td>
+            <td align="left"><button class="Enter-btn" type="submit">Register</button></td>
+          </tr>
+        </table>
+      </form>
+
+
+      <form action="/RegisterStaff" method="POST" id="staff-info" class="hidden">
+        <input type="text" class="Register-info" id="Fname" name = "Fname" placeholder="First name" required>
+        <input type="text" class="Register-info" id="Lname" name = "Lname" placeholder="Last name" required>
+        <input type="text" class="Register-info" id="telephone" name="telephone" placeholder="Phone" require>
+        <input type="text" class="Register-info" id="airline" name = "airline" placeholder="Airline" required>
+        <input type="date" class="Register-info" id="birthday" name = "birthday" placeholder="Birthday" required>
+        <input type="text" class="Register-info" id="username" name="username" placeholder="Username" required>
+        <input type="password" class="Register-info" id="password" name = "password" placeholder="Password" required>
+        <button class="Enter-btn" type="submit">Register</button>
+        </table>
+      </form>
+
+      <div class="response-container"><p id="reg-response"></p></div>
+    </section>
+
+  </body>
+</html>
+
+
